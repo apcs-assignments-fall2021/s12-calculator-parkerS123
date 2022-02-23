@@ -72,9 +72,20 @@ public class Calculator implements ActionListener {
         // Add implemented actionListener method to each button
         button1.addActionListener(this);
         button2.addActionListener(this);
-        // ...
-        // ...
-        // YOUR CODE HERE
+        button3.addActionListener(this);
+        button4.addActionListener(this);
+        button5.addActionListener(this);
+        button6.addActionListener(this);
+        button7.addActionListener(this);
+        button8.addActionListener(this);
+        button9.addActionListener(this);
+        button0.addActionListener(this);
+        buttonClear.addActionListener((this));
+        buttonEquals.addActionListener((this));
+        buttonPlus.addActionListener((this));
+        buttonMinus.addActionListener((this));
+        buttonDivide.addActionListener((this));
+        buttonTimes.addActionListener((this));
 
         // Add panels and everything to the actual frame
         frame.add(field1);
@@ -93,12 +104,37 @@ public class Calculator implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String buttonName = ae.getActionCommand();
 
-        if (buttonName.equals("1")) {
-            field1.setText(field1.getText() + "1");
+        if ("1234567890".contains(buttonName)) {
+            field1.setText(field1.getText() + buttonName);
         }
-        else if (buttonName.equals("2")) {
-            field1.setText(field1.getText() + "2");
+        if (buttonName.equals("AC")){
+            field1.setText("");
         }
+        if ("-+*/".contains(buttonName)){
+            arg1 = Integer.parseInt(field1.getText());
+            op = buttonName;
+            field1.setText("");
+
+        }
+        if (buttonName.equals("=")){
+            if (op.equals("+")){
+                arg1 = arg1 + Integer.parseInt(field1.getText());
+                field1.setText("" + arg1);
+            }
+            if (op.equals("-")){
+                arg1 = arg1 - Integer.parseInt(field1.getText());
+                field1.setText("" + arg1);
+            }
+            if (op.equals("*")){
+                arg1 = arg1 * Integer.parseInt(field1.getText());
+                field1.setText("" + arg1);
+            }
+            if (op.equals("/")){
+                arg1 = arg1 / Integer.parseInt(field1.getText());
+                field1.setText("" + arg1);
+            }
+        }
+
     }
 
     public static void main(String[] args) {

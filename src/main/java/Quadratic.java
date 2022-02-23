@@ -3,19 +3,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Quadratic {
+    JFrame frame;
+    JPanel formulaPanel, buttonPanel;
+    LTPanel aPanel, bPanel, cPanel, answerPanel;
+    JButton clearButton, calculateButton;
+
+
     public Quadratic() {
         // Set up the frame
-        JFrame frame = new JFrame("Quadratic Formula");
+        frame = new JFrame("Quadratic Formula");
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set up and add the panels
-        JPanel formulaPanel = new JPanel();
-        LTPanel aPanel = new LTPanel("a =", 10);
-        LTPanel bPanel = new LTPanel("b =", 10);
-        LTPanel cPanel = new LTPanel("c =", 10);
-        JPanel buttonPanel = new JPanel();
-        LTPanel answerPanel = new LTPanel("Answer:", 10);
+        formulaPanel = new JPanel();
+        aPanel = new LTPanel("a =", 10);
+        bPanel = new LTPanel("b =", 10);
+        cPanel = new LTPanel("c =", 10);
+        buttonPanel = new JPanel();
+        answerPanel = new LTPanel("Answer:", 10);
 
         frame.add(formulaPanel);
         frame.add(aPanel);
@@ -30,7 +36,7 @@ public class Quadratic {
         formulaPanel.add(formulaLabel);
 
         // buttonPanel code
-        JButton clearButton = new JButton("Clear");
+        clearButton = new JButton("Clear");
         clearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 aPanel.setText("");
@@ -39,13 +45,13 @@ public class Quadratic {
             }
         });
 
-        JButton calculateButton = new JButton("Calculate");
+        calculateButton = new JButton("Calculate");
         calculateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 // Potentially a lot of code here
                 // But just add code to call quadForm
 
-                // YOUR CODE HERE
+                quadForm();
             }
         });
 
@@ -58,7 +64,15 @@ public class Quadratic {
     }
 
     public void quadForm() {
-        // YOUR CODE HERE
+        Double a = Double.parseDouble(aPanel.getText());
+        Double b = Double.parseDouble(bPanel.getText());
+        Double c = Double.parseDouble(cPanel.getText());
+
+        Double sqr = Math.sqrt((b * b) - (4 * a * c));
+        Double x = sqr - b;
+        Double ans = x / (2 * a);
+
+        answerPanel.setText("" + ans);
     }
 
     public static void main(String[] args) {
