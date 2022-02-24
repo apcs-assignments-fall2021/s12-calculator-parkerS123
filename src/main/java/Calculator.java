@@ -7,11 +7,11 @@ public class Calculator implements ActionListener {
     // Swing instance variables
     JFrame frame;
     JTextField field1;
-    JPanel panel1, panel2, panel3, panel4;
+    JPanel panel1, panel2, panel3, panel4, panel5;
     JButton button1, button2, button3, button4, button5,
             button6, button7, button8, button9, button0,
             buttonDivide, buttonTimes, buttonMinus, buttonPlus,
-            buttonClear, buttonEquals;
+            buttonClear, buttonEquals, buttonPower, buttonSqrt, buttonFactorial, buttonYroot;
 
     // Instance variables that will be used for our math
     String op;
@@ -69,6 +69,18 @@ public class Calculator implements ActionListener {
         buttonPlus = new JButton("+");
         panel4.add(buttonPlus);
 
+        panel5 = new JPanel();
+        buttonPower = new JButton("x^y");
+        panel5.add(buttonPower);
+        buttonSqrt = new JButton("sqrt");
+        panel5.add(buttonSqrt);
+        buttonFactorial = new JButton("x!");
+        panel5.add(buttonFactorial);
+        buttonYroot = new JButton("y sqrt");
+        panel5.add(buttonYroot);
+
+
+
         // Add implemented actionListener method to each button
         button1.addActionListener(this);
         button2.addActionListener(this);
@@ -86,6 +98,11 @@ public class Calculator implements ActionListener {
         buttonMinus.addActionListener((this));
         buttonDivide.addActionListener((this));
         buttonTimes.addActionListener((this));
+        buttonPower.addActionListener((this));
+        buttonSqrt.addActionListener((this));
+        buttonYroot.addActionListener((this));
+        buttonFactorial.addActionListener((this));
+
 
         // Add panels and everything to the actual frame
         frame.add(field1);
@@ -93,6 +110,7 @@ public class Calculator implements ActionListener {
         frame.add(panel2);
         frame.add(panel3);
         frame.add(panel4);
+        frame.add(panel5);
 
         // 4. Size the frame
         frame.pack();
@@ -110,7 +128,7 @@ public class Calculator implements ActionListener {
         if (buttonName.equals("AC")){
             field1.setText("");
         }
-        if ("-+*/".contains(buttonName)){
+        if ("-+*/ y sqrt x^y".contains(buttonName)){
             arg1 = Integer.parseInt(field1.getText());
             op = buttonName;
             field1.setText("");
@@ -133,7 +151,38 @@ public class Calculator implements ActionListener {
                 arg1 = arg1 / Integer.parseInt(field1.getText());
                 field1.setText("" + arg1);
             }
+            if (op.equals("y sqrt")){
+                int holder = Integer.parseInt(field1.getText());
+                while (holder > 0){
+                    arg1 = (int) Math.sqrt(arg1);
+                    holder--;
+                }
+                field1.setText("" + arg1);
+            }
+            if (op.equals("x^y")){
+                int holder = Integer.parseInt(field1.getText());
+                int result = arg1;
+                while (holder > 0){
+
+                    result = result * arg1;
+                    holder--;
+                }
+                field1.setText("" + result);
+            }
         }
+        if (buttonName.equals("sqrt")){
+            arg1 = (int) Math.sqrt(arg1);
+            field1.setText("" + arg1);
+        }
+        if (buttonName.equals("x!")){
+            int holder = arg1 - 1;
+            while (holder > 1){
+                arg1 = arg1 * (arg1 - 1);
+                holder--;
+            }
+            field1.setText("" + arg1);
+        }
+
 
     }
 
